@@ -16,7 +16,7 @@ export default function* BpmnElementIterator(bpmnElement) {
 
     const descriptor = bpmnElement.$descriptor.propertiesByName[propertyName];
 
-    yield [ property, descriptor.ns.name ];
+    yield [ property, descriptor.ns.name, descriptor ];
 
     // if (isObject(property)) {
     //   yield* BpmnElementIterator(property);

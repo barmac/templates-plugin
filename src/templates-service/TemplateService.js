@@ -34,15 +34,15 @@ export class TemplateService {
     };
     const iterator = BpmnElementIterator(bpmnElement);
 
-    for (const [ property, propertyName ] of iterator) {
-      template = this._handle(property, propertyName, template);
+    for (const [ property, propertyName, descriptor ] of iterator) {
+      template = this._handle(template, propertyName, property, descriptor);
     }
 
     return template;
   }
 
   registerHandler(handler) {
-    this.handler.add(handler);
+    this.handlers.add(handler);
   }
 
   _getDefaultName(bpmnElement) {
@@ -55,15 +55,15 @@ export class TemplateService {
     return uuidv4();
   }
 
-  _handle(property, propertyName, template) {
-    const handler = this._getHandler(property);
+  _handle(template, propertyName, property, descriptor) {
+    const handler = this._getHandler(descriptor, property);
 
-    return handler.handle(template, propertyName, property);
+    return handler.handle(template, propertyName, property, descriptor);
   }
 
-  _getHandler(property) {
+  _getHandler(descriptor, value) {
     for (const handler of this.handlers) {
-      if (handler.canHandle(property)) {
+      if (handler.canHandle(descriptor, value)) {
         return handler;
       }
     }

@@ -6,16 +6,49 @@
 
 export function PrimitiveHandler(service) {
 
-  function handle(template, property, propertyName) {
+  function handle(template, propertyName, value, descriptor) {
+    if (value === '' || value === descriptor.default) {
+      return template;
+    }
+
+    template.properties.push({
+      label: propertyName,
+      type: descriptor.type,
+      value: value,
+      binding: {
+        type: 'property',
+        name: propertyName
+      }
+    });
+
     return template;
   }
 
-  function canHandle() {
-    return false;
+  function canHandle(descriptor, value) {
+    return (
+      !isPlural(descriptor) && !isReference(descriptor) && !isId(descriptor) &&
+      isPrimitiveProperty(value)
+    );
   }
 
-  return {
+  service.registerHandler({
     handle,
     canHandle
-  };
+  });
+}
+
+function isPlural(descriptor) {
+  return descriptor.isMany;
+}
+
+function isReference(descriptor) {
+  return descriptor.isReference;
+}
+
+function isId(descriptor) {
+  return descriptor.isId;
+}
+
+function isPrimitiveProperty(property) {
+  return !property.$type;
 }

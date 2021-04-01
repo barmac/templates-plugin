@@ -132,7 +132,7 @@ export default TemplatesPlugin;
 function templateAddedNotification(name) {
   return {
     type: 'success',
-    title: 'Template Added',
-    content: `Template ${ name } can now be applied by selecting an element an clicking <i>Open Catalog</i> in the properties panel.`
+    title: 'Template Created',
+    content: `Template ${ name } has been created successfully.`
   };
 }

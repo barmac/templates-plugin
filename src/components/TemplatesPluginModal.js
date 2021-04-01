@@ -96,7 +96,7 @@ export default class TemplatesPluginModal extends Component {
                   Cancel
                 </button>
                 <button className="btn btn-primary" type="submit" disabled={ isSubmitting }>
-                  Save
+                  Create
                 </button>
               </Modal.Footer>
             </Form>

@@ -72,9 +72,15 @@ export default class TemplatesPluginModal extends Component {
       return null;
     }
 
+    const { businessObject } = element;
+
+    const template = templateService.generateTemplate(businessObject);
+
+    const { name } = template;
+
     const initialValues = {
-      [ ids.name ]: 'New Template',
-      [ ids.template ]: JSON.stringify(templateService.generateTemplate(element.businessObject), null, 2)
+      [ ids.name ]: name,
+      [ ids.template ]: JSON.stringify(template, null, 2)
     };
 
     return (

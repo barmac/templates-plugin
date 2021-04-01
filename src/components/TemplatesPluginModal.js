@@ -126,13 +126,14 @@ function TextArea(props) {
   const {
     id,
     label,
-    disabled = false
+    disabled = false,
+    rows = 10
   } = props;
 
   return (
     <div className="form-group">
       <label htmlFor={ id }>{ label }</label>
-      <Field type="text" as="textarea" name={ id } id={ id } disabled={ disabled } className="form-control" />
+      <Field type="text" as="textarea" name={ id } id={ id } disabled={ disabled } rows={ rows } className="form-control" />
     </div>
   );
 }

@@ -46,9 +46,9 @@ export class TemplateService {
   }
 
   _getDefaultName(bpmnElement) {
-    const elementName = bpmnElement.get('name') || '';
+    const elementName = bpmnElement.get('name') || 'Element';
 
-    return `${elementName.join(' ')}Template`;
+    return `${elementName.trim()} Template`;
   }
 
   _getId() {

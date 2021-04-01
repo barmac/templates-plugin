@@ -62,7 +62,7 @@ export default class TemplatesPluginModal extends Component {
       return values[ 'property_' + index ];
     });
 
-    debugger
+    debugger;
 
     onSubmit(template);
 
@@ -207,7 +207,7 @@ function PropertyCheckbox(props) {
         <Field type="checkbox" name={ id } id={ id } className="custom-control-input" />
         <label htmlFor={ id } className="custom-control-label" style={ { display: 'flex', 'align-items': 'center' } }>
           <pre style={ { display: 'inline', margin: 0 } }>{ name }</pre>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="001616">
+          <svg style={ { margin: '0 10px 0 8px' } } xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="001616">
             <polygon fill="#909090" fill-rule="evenodd" points="8 3 8 7 15 7 15 9 8 9 8 13 2 8" />
           </svg>
           <pre style={ { display: 'inline', margin: 0 } }>{ value.toString() }</pre>

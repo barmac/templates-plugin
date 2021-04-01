@@ -8,6 +8,10 @@ import getEditMenu from '../util/getEditMenu';
 
 import css from './TemplatesPluginModal.less';
 
+import { TemplateService } from '../templates-service/TemplateService';
+
+const templateService = new TemplateService();
+
 const ids = {
   name: 'templates-plugin-name',
   template: 'templates-plugin-template'
@@ -70,7 +74,7 @@ export default class TemplatesPluginModal extends Component {
 
     const initialValues = {
       [ ids.name ]: 'New Template',
-      [ ids.template ]: JSON.stringify(generateRandomTemplate(element), null, 2)
+      [ ids.template ]: JSON.stringify(templateService.generateTemplate(element.businessObject), null, 2)
     };
 
     return (

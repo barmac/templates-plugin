@@ -62,8 +62,6 @@ export default class TemplatesPluginModal extends Component {
       return values[ 'property_' + index ];
     });
 
-    debugger;
-
     onSubmit(template);
 
     setSubmitting(false);
@@ -176,24 +174,6 @@ function TextField(props) {
   );
 }
 
-function TextArea(props) {
-  const {
-    id,
-    label,
-    disabled = false,
-    rows = 10
-  } = props;
-
-  return (
-    <div className="form-group">
-      {
-        label ? <label htmlFor={ id }>{ label }</label> : null
-      }
-      <Field type="text" as="textarea" name={ id } id={ id } disabled={ disabled } rows={ rows } className="form-control" />
-    </div>
-  );
-}
-
 function PropertyCheckbox(props) {
   const {
     id,
@@ -215,29 +195,4 @@ function PropertyCheckbox(props) {
       </div>
     </div>
   );
-}
-
-function generateRandomTemplate(element) {
-  const { businessObject } = element;
-
-  const { $type: type } = businessObject;
-
-  return {
-    $schema: 'https://unpkg.com/@camunda/element-templates-json-schema@0.3.0/resources/schema.json',
-    id: Date.now().toString(),
-    appliesTo: [
-      type
-    ],
-    properties: [
-      {
-        label: 'Name',
-        type: 'String',
-        value: 'Foo',
-        binding: {
-          type: 'property',
-          name: 'name'
-        }
-      }
-    ]
-  };
 }

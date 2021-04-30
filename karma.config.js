@@ -1,17 +1,22 @@
-const suite = 'test/suite.js';
+const suite = '**/__tests__/*Spec.js';
 
 module.exports = function(karma) {
   karma.set({
     autoWatch: false,
     browsers: [ 'ChromeHeadless' ],
     browserNoActivityTimeout: 30000,
-    files: [ suite ],
+    files: [
+      suite
+    ],
     frameworks: [
       'mocha',
       'sinon-chai'
     ],
     preprocessors: {
-      [ suite ]: [ 'webpack', 'env' ]
+      [ suite ]: [
+        'webpack',
+        'env'
+      ]
     },
     reporters: [ 'spec' ],
     singleRun: true,
@@ -38,10 +43,6 @@ module.exports = function(karma) {
               },
               'less-loader'
             ]
-          },
-          {
-            test: /[/\\][A-Z][^/\\]+\.svg$/,
-            use: 'react-svg-loader'
           },
           {
             test: /\.(bpmn|dmn)$/,

@@ -30,10 +30,6 @@ module.exports = {
           },
           'less-loader'
         ]
-      },
-      {
-        test: /[/\\][A-Z][^/\\]+\.svg$/,
-        use: 'react-svg-loader'
       }
     ]
   },

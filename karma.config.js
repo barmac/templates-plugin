@@ -66,7 +66,7 @@ module.exports = function(karma) {
           require('path').resolve(__dirname)
         ]
       },
-      devtool: 'cheap-source-map'
+      devtool: 'eval-source-map'
     }
   });
 };

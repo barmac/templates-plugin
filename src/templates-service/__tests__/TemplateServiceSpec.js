@@ -11,16 +11,36 @@ import { TemplateService } from '../TemplateService';
 
 describe('<TemplateService>', function() {
 
-  it('should generate template', async function() {
+  it('should handle primitive properties', async function() {
 
     // given
     const serviceTask = `
-    <bpmn:serviceTask id="ServiceTask" camunda:asyncBefore="true">
+    <bpmn:serviceTask id="ServiceTask" camunda:asyncBefore="true" />`;
+
+    const moddle = createModdle();
+
+    const { rootElement } = await moddle.fromXML(serviceTask, 'bpmn:ServiceTask');
+
+    const templateService = new TemplateService();
+
+    // when
+    const template = templateService.generateTemplate(rootElement);
+
+    // then
+    expect(template).to.exist;
+    expect(template.properties).to.have.lengthOf(1);
+  });
+
+
+  it('should handle camunda:Properties', async function() {
+
+    // given
+    const serviceTask = `
+    <bpmn:serviceTask id="Activity_0usmjyo">
       <bpmn:extensionElements>
-        <camunda:inputOutput>
-          <camunda:inputParameter name="input">1</camunda:inputParameter>
-          <camunda:outputParameter name="output">2</camunda:outputParameter>
-        </camunda:inputOutput>
+        <camunda:properties>
+          <camunda:property name="a" value="b" />
+        </camunda:properties>
       </bpmn:extensionElements>
     </bpmn:serviceTask>`;
 
@@ -35,6 +55,7 @@ describe('<TemplateService>', function() {
 
     // then
     expect(template).to.exist;
+    expect(template.properties).to.have.lengthOf(1);
   });
 
 });

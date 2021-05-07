@@ -7,8 +7,13 @@
 export function PrimitiveHandler(service) {
 
   function handle(template, propertyName, value, descriptor) {
+    if (!canHandle(descriptor, value)) {
+      return;
+    }
+
+
     if (value === '' || value === descriptor.default) {
-      return template;
+      return;
     }
 
     template.properties.push({
@@ -20,8 +25,6 @@ export function PrimitiveHandler(service) {
         name: propertyName
       }
     });
-
-    return template;
   }
 
   function canHandle(descriptor, value) {
@@ -32,8 +35,7 @@ export function PrimitiveHandler(service) {
   }
 
   service.registerHandler({
-    handle,
-    canHandle
+    handle
   });
 }
 

@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import handlers from './handlers';
 
-import BpmnElementIterator from './BpmnElementIterator';
+import ElementPropertiesIterator from './ElementPropertiesIterator';
 
 
 export class TemplateService {
@@ -32,10 +32,12 @@ export class TemplateService {
       ],
       properties: []
     };
-    const iterator = BpmnElementIterator(bpmnElement);
+
+
+    const iterator = ElementPropertiesIterator(bpmnElement);
 
     for (const [ property, propertyName, descriptor ] of iterator) {
-      template = this._handle(template, propertyName, property, descriptor);
+      this._handle(template, propertyName, property, descriptor);
     }
 
     return template;
@@ -56,22 +58,8 @@ export class TemplateService {
   }
 
   _handle(template, propertyName, property, descriptor) {
-    const handler = this._getHandler(descriptor, property);
-
-    return handler.handle(template, propertyName, property, descriptor);
-  }
-
-  _getHandler(descriptor, value) {
     for (const handler of this.handlers) {
-      if (handler.canHandle(descriptor, value)) {
-        return handler;
-      }
+      handler.handle(template, propertyName, property, descriptor);
     }
-
-    return { handle: noopHandler };
   }
-}
-
-function noopHandler(template) {
-  return template;
 }

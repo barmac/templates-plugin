@@ -61,7 +61,7 @@ module.exports = {
       react: 'camunda-modeler-plugin-helpers/react'
     }
   },
-  devtool: 'cheap-source-map'
+  devtool: production ? 'source-map' : 'eval-source-map'
 };
 
 function isDevDependency(packageName) {

@@ -6,7 +6,7 @@
 
 import { isUndefined } from 'min-dash';
 
-export default function* BpmnElementIterator(bpmnElement) {
+export default function* ElementPropertiesIterator(bpmnElement) {
   for (const propertyName in bpmnElement) {
     const property = bpmnElement.get(propertyName);
 
@@ -17,17 +17,5 @@ export default function* BpmnElementIterator(bpmnElement) {
     const descriptor = bpmnElement.$descriptor.propertiesByName[propertyName];
 
     yield [ property, descriptor.ns.name, descriptor ];
-
-    // if (isObject(property)) {
-    //   yield* BpmnElementIterator(property);
-    // } else if (isArray(property)) {
-    //   for (const item of property) {
-    //     if (isObject(item)) {
-    //       yield* BpmnElementIterator(item);
-    //     } else {
-    //       yield [ item, `${propertyName}[]` ];
-    //     }
-    //   }
-    // }
   }
 }
